@@ -5,9 +5,7 @@ class admission:
     Key information:
     1. Admit dt, dc/expired dt
     2. List of units, sorted by transferred-to time
-    3. Categorization of admission
-        CPT vs. ICD codes
-
+    3. Categorization of admission:  CPT vs. ICD codes
     """
     def __init__(self, hadm_id, admit_dt, dc_dt, initial_dx="", expired_flag=False):
         self.hadm_id = hadm_id

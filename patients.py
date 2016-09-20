@@ -17,7 +17,7 @@ class patient:
         2. A dict of attributes, such as GENDER, NAME, etc. (See patients.attribute_tag)
         3. A list of admissions, sorted by admissions.admit_dt
         """
-        
+
     def __init__(self, uniqid):
         self.uniqid = uniqid
         self.attributes = {}
