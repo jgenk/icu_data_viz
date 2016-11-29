@@ -1,11 +1,21 @@
 import measurements as m
 import patients
-import mimic_psql_processor
+import psql_utils
+import mimic_psql_processor as mpp
 from datetime import datetime,timedelta
 import random
 
 PASSED_STRING = 'PASSED'
 FAILED_STRING = 'FAILED'
+
+class MiniMimicProcessor(mpp.MimicPatientProcessor):
+
+    def __init__(self, pt_id_list):
+        self.pt_id_list = pt_id_list
+        mpp.MimicPatientProcessor.__init__(self)
+
+    def get_pt_ids(self):
+        return self.pt_id_list
 
 def msrmnt_test():
     lactate = m.measurement("Lactate","mg/dL", m.normal_range(0,1.5))
@@ -33,19 +43,29 @@ def trend_test():
 
     return PASSED_STRING
 
-def pt_test():
-    cur = mimic_psql_processor.mimic_psql_cur("mimic","postgres","123")
-    patient = mimic_psql_processor.build_patient(cur,109)
-    # print patient
-    # for adm in patient.admissions :
-    #     print adm
+def pt_test(pt_ids):
+    processor = MiniMimicProcessor(pt_ids)
+
+    # try:
+    for pt_id in pt_ids:
+        print "\nInit pt #", pt_id, ":", str(processor.get_patient(pt_id,False)) # do not build patient
+        print "Build pt #", pt_id, ":", str(processor.get_patient(pt_id)) # Build patient
+    # except Exception as e:
+        # print e
+        # return FAILED_STRING
+
+
+    processor.close()
+
     return PASSED_STRING
 
 
 if __name__ == '__main__':
     print "Measurement Test: ", msrmnt_test()
     print "Trend Test: ", trend_test()
-    print "Pt Test: ", pt_test()
+    print "Little Pt Test: ", pt_test([95868,11318])
+    # print "Pt Test: ", pt_test(109)
+
 
 
 

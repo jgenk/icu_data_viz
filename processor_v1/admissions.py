@@ -1,4 +1,4 @@
-import unit_stays
+from unit_stays import unit_stay
 
 class admission:
     """
@@ -18,8 +18,8 @@ class admission:
 
     def add_unit_stay(self, unit_stay_obj):
 
-        self.unit_stays.append(admission)
-        self.unit_stays.sort(key=lambda start:unit_stay.start)
+        self.unit_stays.append(unit_stay_obj)
+        self.unit_stays.sort(key=lambda x:x.start)
         return self.unit_stays
 
     def get_unit_stays(self):
@@ -27,7 +27,8 @@ class admission:
 
     def __str__(self):
 
-        return "HADM ID #{0} ({1}-{2}) Dx:{3}".format(self.hadm_id,
+        return "HADM ID #{0} ({1}-{2}), {4} units | Dx:{3}".format(self.hadm_id,
                                                           self.admit_dt.strftime('%Y/%m/%d'),
                                                           self.dc_dt.strftime('%Y/%m/%d'),
-                                                          self.initial_dx)
+                                                          self.initial_dx,
+                                                          len(self.get_unit_stays()))

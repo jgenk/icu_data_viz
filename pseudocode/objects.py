@@ -1,19 +1,39 @@
-class MEASUREMENT:
-  string name
-  string unit
-  (float, float) normal range
+class patient :
+    def init (pt_id) :
+    VARIABLES
+        Set Attributes
+    	OrderedList Admissions # Ordered by admission date
 
-  def IN_NORMAL_RANGE(val)
-    return bool
+    METHODS
+        def <method1> #
+        def <method2> #
 
-class MEASUREMENT_TREND:
-  measurement msr
-  list[2][n] data   # ([0][:] = timestamps (datetime), [1][:])
 
-  def INFER_CONTINUOUS()
-    return model of data w/ continuous representation
+class Attribute :
+    def init (type, val)
+    VARIABLES
+    	AttributeType type
+    	Value val
 
-class PATIENT:
-  string name
-  int mrn
-  list measurement_trend  # list vs. set
+    METHODS
+        __
+        def <method1> #
+        def <method2> #
+
+
+
+
+
+AttributeType
+
+
+class name :
+    def init (<args>) :
+    VARIABLES
+        <var1> #
+        <var2> #
+        ...
+
+    METHODS
+        def <method1> #
+        def <method2> #
