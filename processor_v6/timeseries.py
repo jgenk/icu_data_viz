@@ -9,8 +9,18 @@ import pandas as pd
 
 
 
-class Timeseries:
+class Timeseries(object):
+    """
+    Wrapper for timeseries data, contains a time-indexed pandas.Series object as
+    well as a dataIDs.DataID object describing what the data is and the hadm_id
+    signifying where the data came from.
+    """
     def __init__(self, hadm_id, data_id, timeseries_data):
+        """
+        hadm_id = int, unique ID for the hospital visit
+        data_id = a dataIDs.DataID object describing data held in this Timeseries
+        timeseries_data = pandas.Series object, timeindexed
+        """
         self.hadm_id = hadm_id
         self.data_id = data_id
         self.series = timeseries_data.sort_index() if timeseries_data is not None else pd.Series()
@@ -21,6 +31,11 @@ class Timeseries:
         return unformatted.format(self.data_id, self.series.size)
 
     def time_split(self,start_dt,end_dt,duration_td,hadm_id_index=True):
+        """
+        Splits the timeseries based on two endpoints, divided by a given duration.
+        For example, if start_dt = 0, end_dt = 3, duration_td = 1, then this will
+        produce 3 sub timeseries from 0-1, 1-2, 2-3.
+        """
         split_list = []
         while start_dt < end_dt:
             next_dt = start_dt + duration_td
