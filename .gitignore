@@ -2,3 +2,7 @@
 ###################
 *.pyc
 *.html
+
+#output files
+output/
+*.csv

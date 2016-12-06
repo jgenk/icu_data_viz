@@ -38,7 +38,7 @@ def row_for_features(processor, hadm_id, feature_ids):
 
 def convert_ts_to_row(ts):
     #TODO: Make this more intelligent
-    return pd.to_numeric(ts.series,errors='raise').describe()
+    return pd.to_numeric(ts.series).describe()
     
 def plot_ts(ts):
     series = shift_ts_to_DT(ts, ts.context_df.hadm_admDT[0])
